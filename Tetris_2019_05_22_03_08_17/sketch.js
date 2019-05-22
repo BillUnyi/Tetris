@@ -68,51 +68,63 @@ size = 20;
 time = 0;
 previousTime = 0;
 move = true;
+start = true;
 b1 = new Block(1, 0, size, color(255, 0, 0));
 
 function draw() {
-  background(0);
-  fill(100);
-  drawColumn(0);
-  drawColumn(12);
-  drawHalfCol(13, 0, 2);
-  drawHalfCol(13, 8, h / size);
-  drawHalfCol(14, 0, 2);
-  drawHalfCol(14, 8, h / size);
-  drawHalfCol(15, 0, 2);
-  drawHalfCol(15, 8, h / size);
-  drawHalfCol(16, 0, 2);
-  drawHalfCol(16, 8, h / size);
-  drawColumn(17);
-  if(millis() - previousTime >= 1000) {
-    move = true;  
+  if(start) {
+    background(0);
   }
-  if(move) {
-    move = false;
-    previousTime = millis();
-    if(b1.checkDown(h, size)) {
-       b1.moveDown();
+  else {
+    background(0);
+    fill(100);
+    drawColumn(0);
+    drawColumn(12);
+    drawHalfCol(13, 0, 2);
+    drawHalfCol(13, 8, h / size);
+    drawHalfCol(14, 0, 2);
+    drawHalfCol(14, 8, h / size);
+    drawHalfCol(15, 0, 2);
+    drawHalfCol(15, 8, h / size);
+    drawHalfCol(16, 0, 2);
+    drawHalfCol(16, 8, h / size);
+    drawColumn(17);
+    if(millis() - previousTime >= 1000) {
+      move = true;  
     }
+    if(move) {
+      move = false;
+      previousTime = millis();
+      if(b1.checkDown(h, size)) {
+         b1.moveDown();
+      }
+    }
+    b1.drawBlock();
   }
-  b1.drawBlock();
 }
-
 function keyReleased() {
-  if(keyCode === LEFT_ARROW) {
-    if(b1.checkLeft()) {
-      b1.moveLeft();
+  if(start) {
+    if(keyCode === ENTER) {
+      start = false;
     }
   }
   else {
-    if(keyCode === RIGHT_ARROW) {
-      if(b1.checkRight()) {
-        b1.moveRight();
+    if(keyCode === LEFT_ARROW) {
+      if(b1.checkLeft()) {
+        b1.moveLeft();
       }
     }
     else {
-      if(keyCode === DOWN_ARROW) {
-        if(b1.checkDown(h, size)) {
-          b1.moveDown();
+      if(keyCode === RIGHT_ARROW) {
+        if(b1.checkRight()) {
+          b1.moveRight();
+        }
+      }
+      else {
+        if(keyCode === DOWN_ARROW) {
+          if(b1.checkDown(h, size)) {
+            b1.moveDown();
+          }
         }
       }
     }
