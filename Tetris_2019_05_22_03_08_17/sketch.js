@@ -72,7 +72,7 @@ b1 = new Block(1, 0, size, color(255, 0, 0));
 
 function draw() {
   background(0);
-  fill(150);
+  fill(100);
   drawColumn(0);
   drawColumn(12);
   drawHalfCol(13, 0, 2);
